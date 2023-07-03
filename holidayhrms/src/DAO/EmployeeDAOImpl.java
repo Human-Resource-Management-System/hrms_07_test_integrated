@@ -23,6 +23,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	private EntityManager entityManager;
 	private final Logger logger = LoggerFactory.getLogger(EmployeeDAOImpl.class);
 
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+
 	@Override
 	@Transactional
 	public List<Employee> getAllEmployees(HttpSession session) {

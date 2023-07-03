@@ -26,12 +26,9 @@ public class HolidayDAOImpl implements HolidayDAO {
 	@Override
 	@Transactional
 	public List<Holiday> findAllHolidays() {
-		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-		CriteriaQuery<Holiday> cq = cb.createQuery(Holiday.class);
-		Root<Holiday> root = cq.from(Holiday.class);
-		cq.select(root);
-		cq.orderBy(cb.asc(root.get("hday_date")));
-		return entityManager.createQuery(cq).getResultList();
+		String queryString = "SELECT h FROM Holiday h ORDER BY h.hday_date ASC";
+		TypedQuery<Holiday> query = entityManager.createQuery(queryString, Holiday.class);
+		return query.getResultList();
 	}
 
 	@Override
@@ -82,19 +79,19 @@ public class HolidayDAOImpl implements HolidayDAO {
 		System.out.println("dao count" + count);
 		return count;
 	}
-	
+
 	@Override
-	public List<HrmsJobGrade> getAllJobGradesInfo(){
+	public List<HrmsJobGrade> getAllJobGradesInfo() {
 		TypedQuery<HrmsJobGrade> query = entityManager.createQuery("SELECT jg FROM HrmsJobGrade jg",
 				HrmsJobGrade.class);
 		return query.getResultList();
 	}
-	
+
 	@Override
 	public void saveJobGrade(HrmsJobGrade jobgrade) {
 		entityManager.persist(jobgrade);
 	}
-	
+
 	@Override
 	public void saveJobGradeHoliday(GradeHoliday holiday) {
 		entityManager.persist(holiday);
@@ -106,6 +103,5 @@ public class HolidayDAOImpl implements HolidayDAO {
 		holidaydata.setJbgr_totalnoh(holiday.getJbgr_totalnoh());
 		entityManager.merge(holidaydata);
 	}
-
 
 }

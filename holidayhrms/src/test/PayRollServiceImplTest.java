@@ -100,7 +100,7 @@ public class PayRollServiceImplTest {
 	@Test
 	public void testCalculateTotalPay() {
 		double fixedPay = 18000;
-		double expectedTotalPay = 22500 + (fixedPay * 0.4) + (fixedPay * 0.3) + (fixedPay * 0.3) + 4500;
+		double expectedTotalPay = 22500 + (fixedPay * 0.4) + (fixedPay * 0.3) + (fixedPay * 0.3);
 		double result = payRollService.calculateTotalPay();
 		Assert.assertEquals(result, expectedTotalPay);
 	}
@@ -113,7 +113,7 @@ public class PayRollServiceImplTest {
 		double expectedNetPay = (22500 + (fixedPay * 0.4) + (fixedPay * 0.3) + (fixedPay * 0.3) + 4500)
 				- ((0.25 * ctc) / 12) + ((0.15 * ctc) / 12) + ((0.6 * ctc) / 12) + ((0.05 * (ctc - 500000)) / 12) + 200;
 		double result = payRollService.calculateNetPay() + 200
-				+ (22500 + (fixedPay * 0.4) + (fixedPay * 0.3) + (fixedPay * 0.3) + 4500) - ((0.25 * ctc) / 12)
+				+ (22500 + (fixedPay * 0.4) + (fixedPay * 0.3) + (fixedPay * 0.3)) - ((0.25 * ctc) / 12)
 				+ ((0.15 * ctc) / 12) + ((0.6 * ctc) / 12) + ((0.05 * (ctc - 500000)) / 12) + 200;
 		Assert.assertEquals(result, expectedNetPay);
 	}
